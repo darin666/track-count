@@ -19,15 +19,16 @@ const redisComponent = require('../src/redis');
 describe('Redis', () => {
     describe('redisGet()', () => {
         it('redisGet should return value of the key', async () => {
-            redisGetResult = await redisComponent.redisGet('count');
+            const redisGetResult = await redisComponent.redisGet('count');
             assert.equal(redisGetResult, initData.count);
         });
     });
 
     describe('redisIncrby()', () => {
         it('when input is a number redisIncrby should increase value of the key', async () => {
-            redisIncrbyResult = await redisComponent.redisGet('count', 1);
-            assert.equal(redisIncrbyResult, initData.count + 1);
+            await redisComponent.redisIncrby('count', 1);
+            const redisGetResult = await redisComponent.redisGet('count');
+            assert.equal(redisGetResult, initData.count + 1);
         });
     });
 });
