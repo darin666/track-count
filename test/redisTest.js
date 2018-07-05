@@ -1,14 +1,17 @@
-const redisComponent = require('../src/redis');
+const mock = require('mock-require');
 const Redis = require('ioredis-mock');
 const assert = require('chai').assert;
 
-const redis1 = new Redis({
-  "name" : "Dave",
-  "count" : 3
+const redisMock = new Redis({
+    data: {
+        "name" : "Dave",
+        "count" : 3}
 });
 
-// Results
-redisGetResult = redisComponent.redisGet();
+mock('ioredis', redisMock);
+const redisComponent = require('../src/redis');
+
+redisGetResult = redisComponent.redisGet('count');
 
 describe('Redis', () => {
     describe('redisGet()', () => {
