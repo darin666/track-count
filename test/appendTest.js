@@ -11,7 +11,7 @@ const dataToAppend = {
 beforeEach(function() {
     mock({
         'test': {
-            'data.txt': ''
+            'testData.txt': ''
         }
     });
   });
@@ -20,8 +20,8 @@ beforeEach(function() {
 describe('Append', () => {
     describe('appendData()', () => {
         it('appendData should take a stringyfied dataObject and append it to the file', () => {
-            appendComponent.appendData(dataToAppend, './data.txt');
-            const appendedData = fs.readFileSync('./data.txt', 'utf8')
+            appendComponent.appendData(dataToAppend, './testData.txt');
+            const appendedData = fs.readFileSync('./testData.txt', 'utf8')
             assert.equal(appendedData, dataToAppend);
         });
     });
