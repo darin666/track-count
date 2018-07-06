@@ -31,7 +31,7 @@ app.post('/track', async (req, res, next) => {
 
         if(hasCountProperty) await redis.redisIncrby('count', count);
 
-        append.appendData(req.body);
+        append.appendData(req.body, 'data.txt');
         res.sendStatus(200);
     } catch (error) {
         next(error);
