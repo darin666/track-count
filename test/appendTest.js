@@ -1,7 +1,7 @@
 const fs = require('fs');
-const mock = require('mock-fs');
+const mock = require('mock-require');
+const fsMock = require('mock-fs');
 const assert = require('chai').assert;
-const appendComponent = require('../src/append');
 
 const dataToAppend = {
     name : "Dave",
@@ -9,13 +9,16 @@ const dataToAppend = {
 };
 
 beforeEach(function() {
-    mock({
+    fsMock({
         'test': {
-            'testData.txt': ''
+        'testData.txt': ''
         }
     });
-  });
-  afterEach(mock.restore);
+});
+afterEach(fsMock.restore);
+
+mock('fs', fsMock);
+const appendComponent = require('../src/append');
 
 describe('Append', () => {
     describe('appendData()', () => {
@@ -26,4 +29,3 @@ describe('Append', () => {
         });
     });
 });
-
