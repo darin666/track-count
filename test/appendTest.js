@@ -8,16 +8,23 @@ const dataToAppend = {
     count : 4
 };
 
-beforeEach(function() {
+const mockery = function() {
     fsMock({
         'test': {
         'testData.txt': ''
         }
     });
-});
+};
+
+const whatever = function() {
+    return beforeEach(mockery);
+};
+
+beforeEach(mockery);
+
 afterEach(fsMock.restore);
 
-mock('fs', fsMock);
+mock('fs', whatever);
 const appendComponent = require('../src/append');
 
 describe('Append', () => {
