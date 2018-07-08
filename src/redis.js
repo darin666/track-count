@@ -1,6 +1,5 @@
 const Redis = require('ioredis');
 
-// Create Redis Client
 const client = new Redis();
 
 const redisGet = async (key) => {

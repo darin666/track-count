@@ -6,23 +6,18 @@ const append = require('./src/append');
 const errorHandler = require('./src/errorHandler');
 const redis = require('./src/redis');
 
-// use port 3000 unless there is a preconfigured one
 const port = process.env.port || 3000;
 
-// Init app
 const app = express();
 
-// middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-// GET
 app.get('/count', async (req, res) => {
     const count = await redis.redisGet('count');
     res.status(200).send(count);
 });
 
-// POST
 app.post('/track', async (req, res, next) => {
     try {
         if (_.isEmpty(req.body)) throw new Error('Received an empty object.');
@@ -38,7 +33,6 @@ app.post('/track', async (req, res, next) => {
     };
 });
 
-// error handler
 app.use(errorHandler.errorHandler);
 
 app.listen(port, () => {
