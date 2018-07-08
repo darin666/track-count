@@ -1,12 +1,13 @@
 const fs = require('fs');
+const separator = ",\n";
 
 const appendData = (dataObject, pathToFile) => {
-    const separator = ",\n";
     const dataString = JSON.stringify(dataObject) + separator;
 
-    fs.appendFile(pathToFile, dataString, 'utf8', (err) => {
-        if (err) throw err;
-    });
+    fs.appendFileSync(pathToFile, dataString, 'utf8');
 };
 
-module.exports.appendData = appendData;
+module.exports = {
+    appendData,
+    separator
+}
